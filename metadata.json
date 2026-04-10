@@ -1,0 +1,7 @@
+{
+  "name": "福鼎市气象×环保智慧监管大屏",
+  "description": "福鼎市气象监测与环境保护一体化智慧监管大屏平台，实现数据共享、业务联动、预警统一。",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
