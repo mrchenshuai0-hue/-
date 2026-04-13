@@ -31,6 +31,10 @@
 }
 
 @layer components {
+  .map-tiles-dark {
+    filter: invert(100%) hue-rotate(180deg) brightness(200%) contrast(120%);
+  }
+
   .dashboard-card {
     @apply bg-[#0a2444]/80 border border-brand-blue/30 rounded-lg shadow-2xl;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 242, 254, 0.05);

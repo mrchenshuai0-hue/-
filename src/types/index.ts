@@ -77,6 +77,7 @@ export interface MapLayerState {
   rain: boolean;
   wind: boolean;
   radar: boolean;
+  cloud: boolean;
   centralizedWater: boolean;
   ruralWater: boolean;
 }

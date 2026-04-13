@@ -27,6 +27,7 @@ export const GisMap: React.FC<GisMapProps> = ({ rightPanelOpen = true, leftPanel
     rain: false,
     wind: false,
     radar: false,
+    cloud: false,
     centralizedWater: false,
     ruralWater: false,
   });
@@ -62,9 +63,11 @@ export const GisMap: React.FC<GisMapProps> = ({ rightPanelOpen = true, leftPanel
       attributionControl: false,
     });
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+      subdomains: ['1', '2', '3', '4'],
       maxZoom: 18,
       minZoom: 7,
+      className: 'map-tiles-dark'
     }).addTo(mapInstance.current);
 
     // Initialize layer groups
@@ -99,7 +102,7 @@ export const GisMap: React.FC<GisMapProps> = ({ rightPanelOpen = true, leftPanel
           L.polygon([worldOuter, latLngs], {
             color: 'transparent',
             fillColor: '#000',
-            fillOpacity: 0.25,
+            fillOpacity: 0.7,
             interactive: false
           }).addTo(mapInstance.current);
       }
@@ -109,8 +112,8 @@ export const GisMap: React.FC<GisMapProps> = ({ rightPanelOpen = true, leftPanel
         style: {
           color: '#00f2fe',
           weight: 4,
-          fillColor: 'rgba(0, 242, 254, 0.1)',
-          fillOpacity: 1,
+          fillColor: '#00f2fe',
+          fillOpacity: 0.2,
           dashArray: '10, 5',
         }
       }).addTo(mapInstance.current);
@@ -240,10 +243,10 @@ export const GisMap: React.FC<GisMapProps> = ({ rightPanelOpen = true, leftPanel
           newState.weatherStations ? layerGroups.current.weather.addTo(mapInstance.current) : layerGroups.current.weather.remove();
         } else if (key === 'envStations') {
           newState.envStations ? layerGroups.current.env.addTo(mapInstance.current) : layerGroups.current.env.remove();
-        } else if (['temp', 'rain', 'wind', 'radar'].includes(key)) {
+        } else if (['temp', 'rain', 'wind', 'radar', 'cloud'].includes(key)) {
           // Simulate meteorological overlays with large circles/polygons
           if (newState[key]) {
-            const colors: { [key: string]: string } = { temp: '#f59e0b', rain: '#3b82f6', wind: '#06b6d4', radar: '#10b981' };
+            const colors: { [key: string]: string } = { temp: '#f59e0b', rain: '#3b82f6', wind: '#06b6d4', radar: '#10b981', cloud: '#e2e8f0' };
             const overlay = L.circle(FUDING_CENTER, {
               radius: 15000,
               color: colors[key],
@@ -391,6 +394,7 @@ export const GisMap: React.FC<GisMapProps> = ({ rightPanelOpen = true, leftPanel
               { id: 'rain', name: '降雨图', icon: '🌧️' },
               { id: 'wind', name: '风况图', icon: '💨' },
               { id: 'radar', name: '雷达图', icon: '📡' },
+              { id: 'cloud', name: '云图', icon: '☁️' },
             ].map(l => (
               <label key={l.id} className="flex items-center gap-2 cursor-pointer group p-1.5 rounded-md hover:bg-brand-blue/10 transition-all border border-transparent hover:border-brand-blue/20">
                 <input type="checkbox" checked={layers[l.id as keyof MapLayerState]} onChange={() => toggleLayer(l.id as keyof MapLayerState)} className="hidden" />

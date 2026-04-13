@@ -85,7 +85,7 @@ export default function App() {
                 <div className="w-1 h-3 bg-brand-blue/40" />
               </div>
               <h1 className="text-3xl font-black tracking-[0.5em] text-gradient uppercase italic leading-none whitespace-nowrap drop-shadow-[0_0_20px_rgba(0,242,254,0.6)]">
-                福鼎市气象环保智慧监管平台
+                福鼎市饮用水水源地气象服务平台
               </h1>
               <div className="flex items-center gap-1">
                 <div className="w-1 h-3 bg-brand-blue/40" />
